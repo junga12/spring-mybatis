@@ -3,27 +3,32 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.junga.user.mapper.UserMapper">
-<!--    <insert id="insertUser" parameterType="userDto">-->
-<!--        INSERT INTO users-->
-<!--        VALUES (#{userId}, #{username}, #{password})-->
-<!--    </insert>-->
-
 <!--    <update id="updateUser" parameterType="UserDto">-->
 <!--        UPDATE users-->
 <!--        SET username = #{username}, password = #{password}-->
 <!--        WHERE user_id = #{userId}-->
 <!--    </update>-->
 
-<!--    <delete id="deleteUser" parameterType="int">-->
-<!--        DELETE FROM users-->
-<!--        WHERE user_id = #{userId}-->
-<!--    </delete>-->
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM users
+        WHERE user_id = #{id}
+    </delete>
 
-<!--    <select id="selectOneUser" parameterType="int" resultType="userDto">-->
-<!--        SELECT * FROM users WHERE user_id = #{userId}-->
-<!--    </select>-->
+    <select id="selectUser" parameterType="int" resultType="userDto">
+        SELECT * FROM users WHERE user_id = #{id}
+    </select>
 
     <select id="selectAllUser" resultType="UserDto">
         SELECT * FROM users
     </select>
+
+    <insert id="insertUser2" parameterType="userDto" >
+        INSERT INTO users (user_id, username, password)
+        VALUES (10, #{username}, #{password})
+    </insert>
+
+    <insert id="insertUser" parameterType="map" useGeneratedKeys="true" keyProperty="UserDto.userId">
+        INSERT INTO users (username, password)
+        VALUES (#{UserDto.username}, #{UserDto.password})
+    </insert>
 </mapper>
